@@ -37,6 +37,7 @@ import axios from "axios";
 
 const url = "https://gar-test.hobbiton.tech/insurance-companies";
 
+
 export const Table = class extends Component {
   constructor(props) {
     super(props);
@@ -46,10 +47,12 @@ export const Table = class extends Component {
       itemIdToOpenActionsPopoverMap: {},
       sortedColumn: "title",
       itemsPerPage: 10,
-      companies: []
-    };   
- const { companies } = this.state
+      isLoading: false,
+      companies: [],
+    };
 
+    const { companies, isLoading } = this.state;
+    
 
     this.items = [
       {
@@ -61,7 +64,6 @@ export const Table = class extends Component {
         companyEmail: "",
       },
     ];
-
 
     this.sortableProperties = new SortableProperties(
       [
@@ -178,22 +180,26 @@ export const Table = class extends Component {
     this.state.firstItemIndex = this.pager.getFirstItemIndex();
     this.state.lastItemIndex = this.pager.getLastItemIndex();
   }
+  
 
-  //  fetchCompanies = () => {
-  //   axios.get(url).then((res) => {
-  //     this.setState({ companies: res.data.data });
-  //     console.log(`Response -------> ${JSON.stringify(res.data.data)}`);
-  //   });
+  fetchCompanies = () => {
+    axios.get(url).then((res) => {
+      this.setState({ companies: res.data.data, isLoading: true }, () => {
+       
+        // this.state.companies.map(company=>(console.log(company)))
+      
+      });
+     
+      console.log(`Response -------> ${JSON.stringify(res.data.data)}`);
+    });
 
-  //   console.log(`URL ----> ${url}`);
+    console.log(`URL ----> ${url}`);
+  };
 
-  //   console.log(`NAME ----> ${this.state.companies.map(company=>(company.name))}`);  
+  componentDidMount() {
+    this.fetchCompanies();
+  }
 
-  // };
-
-  // componentDidMount(){
-  //   this.fetchCompanies();
-  // }
 
   onChangeItemsPerPage = (itemsPerPage) => {
     this.pager.setItemsPerPage(itemsPerPage);
@@ -574,7 +580,9 @@ export const Table = class extends Component {
     }
 
     return (
+     
       <div>
+
         <EuiFlexGroup gutterSize="m">
           {optionalActionButtons}
 

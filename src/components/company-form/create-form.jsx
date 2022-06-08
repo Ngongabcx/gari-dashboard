@@ -17,10 +17,12 @@ export const CompanyCreateForm = () => {
     const name = event.target.name;
     const value = event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
+    
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(inputs)
 
     try {
       // make axios post request
@@ -30,6 +32,7 @@ export const CompanyCreateForm = () => {
         data: JSON.stringify(inputs),
         headers: { "Content-Type": "application/json" },
       });
+      setInputs({});
       console.log(response.data.data);
     } catch (error) {
       console.log(error.response);
@@ -40,7 +43,7 @@ export const CompanyCreateForm = () => {
     <EuiForm component="form" onSubmit={handleSubmit}>
       <EuiFormRow label="Comapny name" helpText="I am some friendly help text.">
         <EuiFieldText
-          name="first"
+          name="name"
           value={inputs.name}
           onChange={handleChange}
         />
@@ -50,25 +53,25 @@ export const CompanyCreateForm = () => {
         label="Company email"
         helpText="I am some friendly help text."
       >
-        <EuiFieldText name="last" value={inputs.companyEmail} onChange={handleChange} />
+        <EuiFieldText name="companyEmail" value={inputs.companyEmail} onChange={handleChange} />
       </EuiFormRow>
 
       <EuiFormRow
         label="Company phone number"
         helpText="I am some friendly help text."
       >
-        <EuiFieldText name="last" value={inputs.companyNumber} onChange={handleChange} />
+        <EuiFieldText name="companyNumber" value={inputs.companyNumber} onChange={handleChange} />
       </EuiFormRow>
 
       <EuiFormRow
         label="Company adress"
         helpText="I am some friendly help text."
       >
-        <EuiFieldText name="last" value={inputs.address} onChange={handleChange} />
+        <EuiFieldText name="address" value={inputs.address} onChange={handleChange} />
       </EuiFormRow>
 
       <EuiFormRow label="Account name" helpText="I am some friendly help text.">
-        <EuiFieldText name="last" value={inputs.accountName} onChange={handleChange} />
+        <EuiFieldText name="accountName" value={inputs.accountName} onChange={handleChange} />
       </EuiFormRow>
 
       <EuiFormRow
@@ -76,23 +79,47 @@ export const CompanyCreateForm = () => {
         helpText="I am some friendly help text."
       >
         <EuiFieldText
-          name="last"
+          name="accountNumber"
           value={inputs.accountNumber}
           onChange={handleChange}
         />
       </EuiFormRow>
-
-      <EuiFormRow label="Name" helpText="I am some friendly help text.">
-        <EuiFieldText name="last" value={inputs.name} onChange={handleChange} />
+      <EuiFormRow
+        label="Branch "
+        helpText="I am some friendly help text."
+      >
+        <EuiFieldText
+          name="name"
+          value={inputs.name}
+          onChange={handleChange}
+        />
       </EuiFormRow>
 
-      <EuiFormRow label="Name" helpText="I am some friendly help text.">
-        <EuiFieldText name="last" value={inputs.name} onChange={handleChange} />
+      <EuiFormRow
+        label="Branch Code "
+        helpText="I am some friendly help text."
+      >
+        <EuiFieldText
+          name="code"
+          value={inputs.code}
+          onChange={handleChange}
+        />
       </EuiFormRow>
+
+      <EuiFormRow
+        label="Description"
+        helpText="I am some friendly help text."
+      >
+        <EuiFieldText
+          name="description"
+          value={inputs.description}
+          onChange={handleChange}
+        />
+        </EuiFormRow>
 
       <EuiSpacer />
 
-      <EuiButton type="submit" fill>
+      <EuiButton type="submit" fill onClick={handleChange}>
         Save form
       </EuiButton>
     </EuiForm>

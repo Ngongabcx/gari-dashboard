@@ -16,20 +16,27 @@ import axios from "axios";
 const url = "https://gar-test.hobbiton.tech/insurance-companies";
 
 export const Body = () => {
-  const [companies, setCompanies] = useState([]);
+//   const [companies, setCompanies] = useState([]);
+  
 
-  useEffect(() => {
-    fetchCompanies();
-  }, []);
+//   useEffect(() => {
+//     fetchCompanies();
+//   }, []);
 
-  const fetchCompanies = () => {
-    axios.get(url).then((res) => {
-      setCompanies(res.data.data);
-      console.log(`Response -------> ${JSON.stringify(res.data.data)}`);
-    });
+//   const fetchCompanies = () => {
+//      axios.get(url).then((res) => {
+//       setCompanies(res.data.data);
+//       console.log(`Response -------> ${JSON.stringify(res.data.data)}`);
+//     });
 
-    console.log(`URL ----> ${url}`);
-  };
+//     console.log(`URL ----> ${url}`);
+//   };
+
+//   let data = []
+
+//  companies.map(company=>(data.push(company.name)))
+//  console.log(data);
+  
 
   return (
     <EuiPage>
@@ -46,7 +53,7 @@ export const Body = () => {
           <EuiSpacer />
           <EuiPageContentBody>
             
-              <Table companies={companies}/>
+              <Table/>
          
           </EuiPageContentBody>
         </EuiPageContent>
